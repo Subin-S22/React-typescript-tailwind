@@ -1,18 +1,20 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import classes from "../../utils/classes";
-import Button from "../atoms/Button";
+import Button from "../atoms/button";
 
 //navigation content names
-const NavBars = ["home", "trending", "contact", "about us"];
+const NavBars = ["home", "trending", "contact", "aboutus", "login", "signup"];
 
 const Header: React.FC = () => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	//styling for the component
 	const styles = {
-		container: `flex justify-between items-center padding p-4 bg-teal-600`,
+		container: `flex justify-between items-center padding p-4 bg-teal-600 max-w-7xl`,
 		flex: `flex`,
-		navLink: `p-1 capitalize text-[1rem] underline underline-offset-1 cursor-pointer hover:text-blue-200`,
+		navLink: `px-2 py-1 capitalize text-[1rem] hover:shadow-sm hover:text-white hover:bg-teal-300
+		 hover:rounded-md active:bg-teal-500 cursor-pointer`,
 		button: `bg-violet-300 mx-1 border-gray-200 border-[1px] rounded-md text-center w-full`,
 		actionsButton: `hidden sm:flex space-x-2`,
 		dropdown: `absolute top-12 -inset-x-20 p-2 transition transform origin-top-left sm:hidden 
@@ -24,10 +26,10 @@ const Header: React.FC = () => {
 		<div className={styles.container}>
 			<div className={styles.navLink}>logo</div>
 			<div className={classes([styles.flex, "hidden sm:flex space-x-2"])}>
-				{NavBars.map((name) => (
-					<div className={styles.navLink} key={name}>
-						{name}
-					</div>
+				{NavBars.slice(0, 4).map((name) => (
+					<Link to={`/${name}`} key={name}>
+						<button className={styles.navLink}>{name}</button>
+					</Link>
 				))}
 			</div>
 			<div className="relative">
@@ -43,12 +45,10 @@ const Header: React.FC = () => {
 				</div>
 				<div className={classes([styles.dropdown])}>
 					{NavBars.map((name) => (
-						<div className={styles.navLink} key={name}>
-							{name}
-						</div>
+						<Link to={`/${name}`} key={name}>
+							<div className={styles.navLink}>{name}</div>
+						</Link>
 					))}
-					<Button name="Login" />
-					<Button name="Signup" />
 				</div>
 			</div>
 		</div>

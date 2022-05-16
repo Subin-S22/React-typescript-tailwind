@@ -1,13 +1,19 @@
 import React from "react";
-import Header from "../components/organisms/Header";
-import Feeds from "../components/organisms/Feeds";
-import Footer from "../components/organisms/Footer";
+import Header from "../components/organisms/header";
+import Feeds from "../components/organisms/feeds";
+import Footer from "../components/organisms/footer";
 
 const Home = () => {
 	return (
 		<>
 			<Header />
-			<Feeds />
+			<div className="p-4 sm:flex sm:flex-wrap max-w-7xl">
+				{Array(10)
+					.fill(0)
+					.map((_, index) => (
+						<Feeds key={index} />
+					))}
+			</div>
 			<Footer />
 		</>
 	);
